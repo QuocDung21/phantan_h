@@ -234,7 +234,7 @@ const ViewParentProductCategories = () => {
 
             <Box>
                 <Header title="Danh sách"
-                        buttonTitle={"ADD PARENT PRODUCT CATEGORY"}
+                        buttonTitle={"Phân tán"}
                         buttonURL={`/add_parent_product_category/`}
                 />
                 <Box sx={{margin: 5}}>

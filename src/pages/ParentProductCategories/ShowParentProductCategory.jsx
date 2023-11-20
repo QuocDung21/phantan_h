@@ -51,7 +51,7 @@ export default function ShowParentProductCategory() {
       
     <Box>
     <Header title="Danh sách"
-       buttonTitle={"ADD PARENT PRODUCT CATEGORY"}
+       buttonTitle={"Phân tán"}
        buttonURL={`/add_parent_product_category/`}
         />
     <Divider style={{ marginBottom:"30px" }} />
