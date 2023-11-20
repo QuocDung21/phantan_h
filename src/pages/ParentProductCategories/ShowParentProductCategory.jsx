@@ -50,7 +50,7 @@ export default function ShowParentProductCategory() {
     <Box m="30px">
       
     <Box>
-    <Header title="Parent Category Details" 
+    <Header title="Danh sách"
        buttonTitle={"ADD PARENT PRODUCT CATEGORY"}
        buttonURL={`/add_parent_product_category/`}
         />
@@ -121,12 +121,6 @@ export default function ShowParentProductCategory() {
           <Typography  color="text.secondary">
            {parentProductCategory.parent_product_category_description}
           </Typography>
-
-
-
-
-
-
 
         </CardContent>
       </CardActionArea>
