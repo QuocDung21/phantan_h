@@ -70,7 +70,6 @@ app.get('/data', async (req, res) => {
                 "LEFT JOIN DiemThuTien ON Nuoc.ma_mang_luoi = DiemThuTien.ma_mang_luoi\n" +
                 "LEFT JOIN GiaTienNuoc ON MangLuoi.ma_mang_luoi = GiaTienNuoc.ma_mang_luoi\n" +
                 "left join dichvucapnuoc d on GiaTienNuoc.ma_dich_vu = d.ma_dich_vu;";
-
             connection.query(query, async (error, results, fields) => {
                 connection.release();
                 if (error) {
@@ -86,7 +85,6 @@ app.get('/data', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 app.get('/data/:chinhanh', async (req, res) => {
     const chinhanh = req.params.chinhanh;
