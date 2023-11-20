@@ -174,7 +174,7 @@ const ViewProductCategories = () => {
       
       <Box>
       <Header title="Product Categories" 
-       buttonTitle={"ADD PRODUCT CATEGORY"}
+       buttonTitle={"Phân tán"}
        buttonURL={`/add_product_category/`}
         />
 

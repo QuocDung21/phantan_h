@@ -5,7 +5,6 @@ const mysql = require('mysql2');
 const sql = require('mssql')
 
 
-
 // Kêt nối Sql Server
 const config = {
     user: "SA",
@@ -22,7 +21,6 @@ const config = {
         trustServerCertificate: true
     }
 }
-
 
 
 //Kết nối mysql
