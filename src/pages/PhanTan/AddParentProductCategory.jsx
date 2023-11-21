@@ -17,10 +17,23 @@ import {Label} from "@mui/icons-material";
 
 const AddParentProductCategory = () => {
 
-    const [tramcapnuoc, setTramcapnuoc] = useState([])
+    const [chinhanh, setChiNhanh] = useState([])
+    const [tramcap, setTramcap] = useState([])
+    const [mangluoi, setMangluoi] = useState([])
+
+
     const getData = async () => {
         await axios.get(baseUrl + "chi-nhanh").then((response) => {
-            setTramcapnuoc(response.data)
+            setChiNhanh(response.data)
+        }).catch((e) => {
+            console.log(e)
+        })
+    }
+
+    const getDataCnTram = async (idTram) => {
+        await axios.get(baseUrl + `tram/${idTram}`).then((response) => {
+            console.log(response)
+            setTramcap(response.data)
         }).catch((e) => {
             console.log(e)
         })
@@ -30,68 +43,118 @@ const AddParentProductCategory = () => {
         getData()
     }, []);
 
-    console.log(tramcapnuoc)
+    console.log(chinhanh)
     const isNonMobile = useMediaQuery("(min-width:600px)");
-    // states for data submission
-    const [parent_product_category_name, setParentProductCategoryName] = useState('');
-    const [parent_product_category_description, setParentProductCategoryDescription] = useState('');
     const [parent_product_category_status, setParentProductCategoryStatus] = useState('');
     const [isSaving, setIsSaving] = useState(false);
-
-    // handle drop down change
-    const handleChangeParentCategoryStatus = (event) => {
+    const [dataTram, setDataTram] = useState('');
+    const [dataMangLuoi, setDataMangLuoi] = useState([]);
+    const [idChiNhanh, setIdChiNhanh] = useState('');
+    const [idTram, setIdTram] = useState('');
+    const [idMangLuoi, setIdMangLuoi] = useState('');
+    const handleChangeParentCategoryStatus = async (event) => {
         setParentProductCategoryStatus(event.target.value);
+        setIdChiNhanh(event.target.value);
+        await getDataCnTram(event.target.value)
+
     };
 
-    // handle data saving to api
-    const submitData = () => {
+    const handleChangeTram = async (event) => {
+        await setIdTram(event.target.value)
+        getMangLuoi(event.target.value)
+    }
 
-        setIsSaving(true);
-        axios.post('http://127.0.0.1:8000/api/v1/parent_product_categories/create', {
-            // database fields
-            parent_product_category_name: parent_product_category_name,
-            parent_product_category_description: parent_product_category_description,
-            parent_product_category_status: parent_product_category_status,
-        })
-            // trigger sweet alerts on success
-            .then(function (response) {
+    const handleChangeMangLuoi = async (event) => {
+        await setIdMangLuoi(event.target.value)
+    }
+
+    const getMangLuoi = async (_idTram) => {
+        await axios.get(baseUrl + 'mang-luoi/' + _idTram)
+            .then((res) => {
+                console.log(res.data)
+                setDataMangLuoi(res.data)
+            }).catch(() => {
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Parent Category saved successfully!',
+                    icon: 'error',
+                    title: 'Phân tán không thành công!',
                     showConfirmButton: false,
                     timer: 1500
                 })
-                setIsSaving(false);
-                setParentProductCategoryName('')
-                setParentProductCategoryDescription('')
-                setParentProductCategoryStatus('')
             })
-            // trigger sweet alerts on failure
-            .catch(function (error) {
-
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error, Missing Data !',
-                    showConfirmButton: false,
-                    timer: 1700
-                })
-                setIsSaving(false)
-            });
     }
 
-    // end of  handle data saving to api
+
+    const phanTanMangLuoi = async (_idMangLuoi) => {
+        await axios.get(baseUrl + 'phantan-mangluoi/' + _idMangLuoi)
+            .then((res) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Phân tán thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }).catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Phân tán không thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+    }
+
+    const phanTanTram = async (_idTram, _idChinhanh) => {
+        await axios.get(baseUrl + 'phantan-tram/' + _idTram + '/' + _idChinhanh)
+            .then((res) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Phân tán thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }).catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Phân tán không thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+    }
+
+    const phanTan = async (id) => {
+        await axios.get(baseUrl + 'phantan-chinhanh/' + id)
+            .then((res) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Phân tán thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }).catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Phân tán không thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+        if (idTram) {
+            phanTanTram(idTram, idChiNhanh)
+        }
+        if (idMangLuoi) {
+            phanTanMangLuoi(idMangLuoi)
+        }
+    }
 
 
     return (
         <Box mt="30px" mb="60px" mr="60px" ml="60px">
-
             <Box>
                 <Header title="Phân tán tỉnh Vĩnh Long"
                         buttonTitle={"Xem"}
                         buttonURL={`/view_parent_product_categories/`}
                 />
-                <h2>Từ</h2>
                 <Box>
                     <form>
                         <Box
@@ -102,29 +165,8 @@ const AddParentProductCategory = () => {
                                 "& > div": {gridColumn: isNonMobile ? undefined : "span 4"},
                             }}
                         >
-                            {/* Tram cap nuoc */}
-                            <FormControl fullWidth sx={{gridColumn: "span 2"}}>
-                                <InputLabel id="demo-simple-select-label">Chọn trạm</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={parent_product_category_status}
-                                    label="Select Status"
-                                    onChange={handleChangeParentCategoryStatus}
-                                >
-                                    {
-                                        tramcapnuoc.map((data, index) => (
-                                            <MenuItem key={index} value={data.ma_chi_nhanh}>
-                                                {data.ten_tram_cap_nuoc}
-                                            </MenuItem>
-                                        ))
-                                    }
-                                </Select>
-                            </FormControl>
-
-
                             {/* Chi nhanh */}
-                            <FormControl fullWidth sx={{gridColumn: "span 2"}}>
+                            <FormControl fullWidth sx={{gridColumn: "span 4"}}>
                                 <InputLabel id="demo-simple-select-label">Chi nhánh</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -134,7 +176,7 @@ const AddParentProductCategory = () => {
                                     onChange={handleChangeParentCategoryStatus}
                                 >
                                     {
-                                        tramcapnuoc.map((data, index) => (
+                                        chinhanh.map((data, index) => (
                                             <MenuItem key={index} value={data.ma_chi_nhanh}>
                                                 {data.ten_chi_nhanh}
                                             </MenuItem>
@@ -143,18 +185,37 @@ const AddParentProductCategory = () => {
                                 </Select>
                             </FormControl>
 
-                            {/* Chi nhanh */}
+                            {/* Tram cap nuoc */}
+                            <FormControl fullWidth sx={{gridColumn: "span 2"}}>
+                                <InputLabel id="demo-simple-select-label">Chọn trạm</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={idTram}
+                                    label="Chọn trạm"
+                                    onChange={handleChangeTram}
+                                >
+                                    {
+                                        tramcap.map((data, index) => (
+                                            <MenuItem key={index} value={data.ma_tram_cap_nuoc}>
+                                                {data.ten_tram_cap_nuoc}
+                                            </MenuItem>
+                                        ))
+                                    }
+                                </Select>
+                            </FormControl>
+
                             <FormControl fullWidth sx={{gridColumn: "span 2"}}>
                                 <InputLabel id="demo-simple-select-label">Mạng lưới</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={parent_product_category_status}
+                                    value={idMangLuoi}
                                     label="Select Status"
-                                    onChange={handleChangeParentCategoryStatus}
+                                    onChange={handleChangeMangLuoi}
                                 >
                                     {
-                                        tramcapnuoc.map((data, index) => (
+                                        dataMangLuoi.map((data, index) => (
                                             <MenuItem key={index} value={data.ma_mang_luoi}>
                                                 {data.ten_mang_luoi}
                                             </MenuItem>
@@ -163,31 +224,14 @@ const AddParentProductCategory = () => {
                                 </Select>
                             </FormControl>
                         </Box>
-                        <h2>Đến</h2>
-                        {/* Tram cap nuoc */}
-                        <FormControl fullWidth sx={{gridColumn: "span 2"}}>
-                            <InputLabel id="demo-simple-select-label">Chọn trạm</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={parent_product_category_status}
-                                label="Select Status"
-                                onChange={handleChangeParentCategoryStatus}
-                            >
-                                {
-                                    tramcapnuoc.map((data, index) => (
-                                        <MenuItem key={index} value={data.ma_chi_nhanh}>
-                                            {data.ten_tram_cap_nuoc}
-                                        </MenuItem>
-                                    ))
-                                }
-                            </Select>
-                        </FormControl>
                         <Box display="flex" justifyContent="start" mt="30px">
-
                             <Button
                                 disabled={isSaving}
-                                onClick={submitData}
+                                // onClick={submitData}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    phanTan(idChiNhanh)
+                                }}
                                 type="submit" size="large" endIcon={<SendIcon/>}
                                 style={{backgroundColor: "#2587da", color: "#ffffff"}} variant="contained">
                                 Phân tán

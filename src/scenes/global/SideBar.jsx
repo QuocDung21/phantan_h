@@ -42,7 +42,6 @@ const SideBar = () => {
                     flexDirection: "column"
                 }}
                 collapsed={isCollapsed}>
-
                 <Menu iconShape="square"
                       style={{backgroundColor: '#06114a', color: '#ffffff', height: "100vh"}}
 
@@ -90,7 +89,6 @@ const SideBar = () => {
                             </Box>
                         )}
                     </MenuItem>
-
                     {!isCollapsed && (
                         <Box mb="25px">
                             <Box display="flex" justifyContent="center" alignItems="center">
@@ -102,7 +100,6 @@ const SideBar = () => {
                                     style={{cursor: "pointer", borderRadius: "50%"}}
                                 />
                             </Box>
-
                             <Box textAlign="center">
                                 <Typography
 
@@ -111,10 +108,7 @@ const SideBar = () => {
                                     fontWeight="bold"
                                     sx={{m: "10px 0 0 0"}}
                                 >
-                                    Wandie
-                                </Typography>
-                                <Typography variant="h5" color="#ffffff">
-                                    wandie@gmail.com
+                                    Hiếu Mập
                                 </Typography>
                             </Box>
                         </Box>
@@ -150,53 +144,41 @@ const SideBar = () => {
                         {/*    component={<Link to="/view_brands" />}*/}
                         {/*    > Manage Brands*/}
                         {/*    </MenuItem>*/}
-
                         {/*  </SubMenu>*/}
-
                         {/*    /!* Units  *!/*/}
                         {/* <SubMenu icon={<InventoryIcon />} label="Units">*/}
-
                         {/*  <MenuItem */}
                         {/*  icon={<ArrowRightAltIcon />}*/}
                         {/*    component={<Link to="/add_unit" />}*/}
                         {/*    > Add Unit*/}
                         {/*    </MenuItem>*/}
-
                         {/*  <MenuItem */}
                         {/*  icon={<ArrowRightAltIcon />}*/}
                         {/*    component={<Link to="/view_units" />}*/}
                         {/*    > Manage Units*/}
                         {/*    </MenuItem>*/}
-
                         {/*  </SubMenu>*/}
-
                         {/*   /!* Suppliers  *!/*/}
                         {/* <SubMenu icon={<InventoryIcon />} label="Suppliers">*/}
-
                         {/*  <MenuItem */}
                         {/*  icon={<ArrowRightAltIcon />}*/}
                         {/*    component={<Link to="/add_supplier" />}*/}
                         {/*    > Add Supplier*/}
                         {/*    </MenuItem>*/}
-
                         {/*  <MenuItem */}
                         {/*  icon={<ArrowRightAltIcon />}*/}
                         {/*    component={<Link to="/view_suppliers" />}*/}
                         {/*    > Manage Suppliers*/}
                         {/*    </MenuItem>*/}
-
                         {/*  </SubMenu>*/}
-
-
                         {/* Products  */}
-                        <SubMenu icon={<InventoryIcon/>} label="Products">
-
+                        <SubMenu icon={<InventoryIcon/>} label="Phân tán">
                             <MenuItem
                                 icon={<ArrowRightAltIcon/>}
                                 component={<Link to="/add_parent_product_category"/>}
                                 // selected={selected}
                                 // setSelected={setSelected}
-                            > Add Parent Category
+                            > Phân tán
                             </MenuItem>
 
                             <MenuItem
@@ -204,40 +186,40 @@ const SideBar = () => {
                                 component={<Link to="/view_parent_product_categories"/>}
                                 // selected={selected}
                                 // setSelected={setSelected}
-                            > Parent Categories
+                            > Danh sách
                             </MenuItem>
 
-                            <MenuItem
-                                icon={<ArrowRightAltIcon/>}
-                                component={<Link to="/add_product_category"/>}
-                                // selected={selected}
-                                // setSelected={setSelected}
-                            > Add Category
-                            </MenuItem>
+                            {/*<MenuItem*/}
+                            {/*    icon={<ArrowRightAltIcon/>}*/}
+                            {/*    component={<Link to="/add_product_category"/>}*/}
+                            {/*    // selected={selected}*/}
+                            {/*    // setSelected={setSelected}*/}
+                            {/*> Add Category*/}
+                            {/*</MenuItem>*/}
 
-                            <MenuItem
-                                icon={<ArrowRightAltIcon/>}
-                                component={<Link to="/view_product_categories"/>}
-                                // selected={selected}
-                                // setSelected={setSelected}
-                            > Manage Categories
-                            </MenuItem>
+                            {/*<MenuItem*/}
+                            {/*    icon={<ArrowRightAltIcon/>}*/}
+                            {/*    component={<Link to="/view_product_categories"/>}*/}
+                            {/*    // selected={selected}*/}
+                            {/*    // setSelected={setSelected}*/}
+                            {/*> Manage Categories*/}
+                            {/*</MenuItem>*/}
 
-                            <MenuItem
-                                icon={<ArrowRightAltIcon/>}
-                                component={<Link to="/view_product_categories"/>}
-                                // selected={selected}
-                                // setSelected={setSelected}
-                            > Add Product
-                            </MenuItem>
+                            {/*<MenuItem*/}
+                            {/*    icon={<ArrowRightAltIcon/>}*/}
+                            {/*    component={<Link to="/view_product_categories"/>}*/}
+                            {/*    // selected={selected}*/}
+                            {/*    // setSelected={setSelected}*/}
+                            {/*> Add Product*/}
+                            {/*</MenuItem>*/}
 
-                            <MenuItem
-                                icon={<ArrowRightAltIcon/>}
-                                component={<Link to="/view_product_categories"/>}
-                                // selected={selected}
-                                // setSelected={setSelected}
-                            > Manage Products
-                            </MenuItem>
+                            {/*<MenuItem*/}
+                            {/*    icon={<ArrowRightAltIcon/>}*/}
+                            {/*    component={<Link to="/view_product_categories"/>}*/}
+                            {/*    // selected={selected}*/}
+                            {/*    // setSelected={setSelected}*/}
+                            {/*> Manage Products*/}
+                            {/*</MenuItem>*/}
 
                         </SubMenu>
 

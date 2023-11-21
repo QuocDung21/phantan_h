@@ -34,14 +34,6 @@ const EditParentProductCategory = () => {
     };
   
 
-
-
-    // states for data submission
-      // const [name, setName] = useState('');
-      // const [description, setDescription] = useState('');
-      // const [isSaving, setIsSaving] = useState(false);
-  
-      // pick existing data to form as form value
       useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/v1/parent_product_categories/${id}`)
         .then(function (response) {

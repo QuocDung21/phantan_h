@@ -56,21 +56,35 @@ const ViewParentProductCategories = () => {
     }
 
     const getDataPt = async (id) => {
-        await axios.get(baseUrl + 'data/' + id)
+        await axios.get(baseUrl + 'data-mysql/' + id)
             .then(function (response) {
-                // Thêm thuộc tính 'id' vào mỗi đối tượng trong mảng dữ liệu
                 const dataWithId = response.data.map((item, index) => ({
                     ...item,
-                    id: index + 1 // Bạn có thể chọn một giá trị khác cho 'id'
+                    id: index + 1
                 }));
-                setParentProductCategoryData(dataWithId); // Đặt dữ liệu vào state parentProductCategoryData
-                setData(dataWithId); // Bạn có thể giữ nguyên dòng này hoặc xóa đi tùy thuộc vào cách bạn muốn sử dụng dữ liệu
+                setParentProductCategoryData(dataWithId);
+                setData(dataWithId);
                 console.log(dataWithId);
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
+    // const getDataSqlserver = async (id) => {
+    //     await axios.get(baseUrl + 'data-mysql/' + id)
+    //         .then(function (response) {
+    //             const dataWithId = response.data.map((item, index) => ({
+    //                 ...item,
+    //                 id: index + 1
+    //             }));
+    //             setParentProductCategoryData(dataWithId);
+    //             setData(dataWithId);
+    //             console.log(dataWithId);
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }
 
     useEffect(() => {
         getDataPt(id_);
@@ -107,18 +121,18 @@ const ViewParentProductCategories = () => {
         },
 
         {
-            field: 'ngay_kiem_tra',
-            headerName: 'Ngày kiểm tra',
+            field: 'dia_chi',
+            headerName: 'Địa chỉ',
             width: 200,
             editable: true,
         },
-
-        {
-            field: 'ten_khach_hang',
-            headerName: 'Tên khách hàng',
-            width: 200,
-            editable: true,
-        },
+        //
+        // {
+        //     field: 'do_am',
+        //     headerName: 'Độ ẩm',
+        //     width: 200,
+        //     editable: true,
+        // },
 
         // view action
         // {
@@ -201,10 +215,8 @@ const ViewParentProductCategories = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-
             if (result.isConfirmed) {
                 axios.delete(`http://127.0.0.1:8000/api/v1/parent_product_categories/${id}`)
-                    // trigger sweet alerts on successful delete
                     .then(function (response) {
                         Swal.fire({
                             icon: 'success',
@@ -214,7 +226,6 @@ const ViewParentProductCategories = () => {
                         })
                         getParentProductCategories()
                     })
-                    // trigger sweet alerts on error
                     .catch(function (error) {
                         Swal.fire({
                             icon: 'error',
@@ -226,7 +237,6 @@ const ViewParentProductCategories = () => {
             }
         })
     }
-    // end of delete data from api
 
 
     return (
@@ -285,10 +295,7 @@ const ViewParentProductCategories = () => {
                                 <CircularProgress color="success"/>
                             </center>
                         </>
-
                     )}
-
-
                     {/*<DataGrid*/}
                     {/*    rows={parentProductCategoryData}*/}
                     {/*    columns={columns}*/}
@@ -304,7 +311,6 @@ const ViewParentProductCategories = () => {
                     {/*    disableRowSelectionOnClick*/}
                     {/*/>*/}
                 </Box>
-
 
                 <div>
 

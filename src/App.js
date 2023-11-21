@@ -49,10 +49,10 @@ import AddSupplier from "./pages/Suppliers/AddSupplier";
 import ViewSuppliers from "./pages/Suppliers/ViewSuppliers";
 
 // parent product categories
-import AddParentProductCategory from "./pages/ParentProductCategories/AddParentProductCategory";
-import ViewParentProductCategories from "./pages/ParentProductCategories/ViewParentProductCategories";
-import ShowParentProductCategory from "./pages/ParentProductCategories/ShowParentProductCategory";
-import EditParentProductCategory from "./pages/ParentProductCategories/EditParentProductCategory";
+import AddParentProductCategory from "./pages/PhanTan/AddParentProductCategory";
+import ViewParentProductCategories from "./pages/PhanTan/ViewParentProductCategories";
+import ShowParentProductCategory from "./pages/PhanTan/ShowParentProductCategory";
+import EditParentProductCategory from "./pages/PhanTan/EditParentProductCategory";
 
 // styling
 
@@ -98,7 +98,7 @@ function App() {
                             <Route path="/view_suppliers" element={<ViewSuppliers/>}/>
 
                             {/* dashboard */}
-                            <Route path="/" element={<Dashboard/>} activeStyle={{backgroundColor: "red"}}/>
+                            <Route path="/" element={<AddParentProductCategory/>} activeStyle={{backgroundColor: "red"}}/>
 
                             {/* parent product category */}
                             <Route path="/add_parent_product_category" element={<AddParentProductCategory/>}/>
