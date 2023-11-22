@@ -7,13 +7,12 @@ const sql = require('mssql')
 
 // Kêt nối Sql Server
 const config = {
-    user: "SA", password: "Dung112001@", database: "HeThongCapNuoc", server: 'localhost', pool: {
+    user: "sa", password: "123", database: "HeThongCapNuoc", server: 'localhost', pool: {
         max: 10, min: 0, idleTimeoutMillis: 30000
     }, options: {
         encrypt: true, trustServerCertificate: true
     }
 }
-
 
 //Kết nối mysql
 const pool = mysql.createPool({
